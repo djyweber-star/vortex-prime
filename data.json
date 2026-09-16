@@ -1,0 +1,151 @@
+{
+  "users": [
+    {
+      "id": 1789432015506,
+      "phone": "+243979193668",
+      "connected": 1
+    },
+    {
+      "id": 1789517480412,
+      "phone": "+243900884802",
+      "connected": 1
+    },
+    {
+      "id": 1789518112077,
+      "phone": "243900884802",
+      "connected": 1
+    }
+  ],
+  "reports": [
+    {
+      "user_id": 1789432015506,
+      "target_phone": "50933 45 7725",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-15T00:54:27.169Z"
+    },
+    {
+      "user_id": 1789432015506,
+      "target_phone": "50933 45 7725",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-15T01:04:12.649Z"
+    },
+    {
+      "user_id": 1789517480412,
+      "target_phone": "243844230265",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-16T00:13:01.529Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:22:54.877Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:23:05.354Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:23:38.718Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:23:43.902Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:23:49.718Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Arnaque",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:24:04.934Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Arnaque",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:24:05.755Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Arnaque",
+      "wa_action": "enregistre",
+      "created_at": "2026-09-16T00:24:05.780Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-16T00:31:41.244Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-16T00:32:03.869Z"
+    },
+    {
+      "user_id": 1789518112077,
+      "from_phone": "243900884802",
+      "target_phone": "+243815474975",
+      "reason": "Spam",
+      "wa_action": "bloque-dans-whatsapp",
+      "created_at": "2026-09-16T00:32:19.953Z"
+    }
+  ],
+  "sessions": {
+    "1789432015506": {
+      "max_reports": 50,
+      "cooldown": 3,
+      "used": 1,
+      "last_ts": 1789434252649
+    },
+    "1789517480412": {
+      "max_reports": 50,
+      "cooldown": 3,
+      "used": 1,
+      "last_ts": 1789517581529
+    },
+    "1789518112077": {
+      "max_reports": 26,
+      "cooldown": 1,
+      "used": 0,
+      "last_report_at": 0,
+      "next_action": "block"
+    }
+  }
+}

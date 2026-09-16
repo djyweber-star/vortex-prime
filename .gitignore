@@ -1,0 +1,6 @@
+node_modules/
+serveur.log
+tunnel.log
+sessions/
+*.backup
+.env

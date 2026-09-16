@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PANEL VORTEX PRIME TDL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bgfx"></canvas>
+
+  <header>
+    <h1 class="glitch" data-text="PANEL VORTEX PRIME TDL">PANEL VORTEX PRIME TDL</h1>
+    <p class="credit">CRÉER PAR MR VORTEX PRIME TDL</p>
+  </header>
+
+  <section id="step-connect">
+    <h2>CONNEXION WHATSAPP</h2>
+    <input id="phone" type="tel" placeholder="Ton numéro avec indicatif (ex : 2250700000000)">
+    <div class="mode-choice">
+      <button class="btn-mode" id="mode-qr" onclick="setMode('qr')">QR CODE</button>
+      <button class="btn-mode" id="mode-pairing" onclick="setMode('pairing')">CODE D'APPAIRAGE</button>
+    </div>
+    <button class="btn-main" onclick="connect()">INITIER LA CONNEXION</button>
+    <button class="btn-reset" onclick="resetSession()">RÉINITIALISER LA SESSION</button>
+
+    <div id="pairing" class="hidden">
+      <p id="wa-status">Initialisation de la session...</p>
+      <div id="pairing-code"></div>
+      <img id="qr" class="hidden" alt="QR WhatsApp">
+    </div>
+  </section>
+
+  <section id="step-panel" class="hidden">
+    <h2>TABLEAU DE BORD</h2>
+    <p class="connected">✔ WHATSAPP CONNECTÉ</p>
+
+    <div id="settings">
+      <h3>PARAMÈTRES</h3>
+      <label>NOMBRE DE SIGNALEMENTS</label>
+      <div class="stepper">
+        <button onclick="stepVal('max-reports', -1)">▼</button>
+        <input id="max-reports" type="number" value="5" min="1" max="100">
+        <button onclick="stepVal('max-reports', 1)">▲</button>
+      </div>
+      <label>DÉLAI ENTRE SIGNALEMENTS (SECONDES)</label>
+      <div class="stepper">
+        <button onclick="stepVal('cooldown', -1)">▼</button>
+        <input id="cooldown" type="number" value="10" min="0" max="600">
+        <button onclick="stepVal('cooldown', 1)">▲</button>
+      </div>
+      <button class="btn-main" onclick="startSession()">DÉMARRER LA SESSION</button>
+    </div>
+
+    <div id="report-zone" class="hidden">
+      <p id="quota" class="quota"></p>
+      <input id="target" type="tel" placeholder="Numéro à signaler / bloquer">
+      <button class="btn-outline" onclick="checkNumber()">🔍 VÉRIFIER LE NUMÉRO</button>
+      <div id="number-type" class="hidden">
+        <p id="ntext"></p>
+      </div>
+      <div id="reason-biz" class="hidden">
+        <label>MOTIF (COMPTE BUSINESS)</label>
+        <select id="reason-b">
+          <option>Pas un business</option>
+          <option>Code faux</option>
+          <option>Je ne suis pas inscrit</option>
+          <option>Harcèlement</option>
+          <option>Arnaque</option>
+        </select>
+      </div>
+      <div id="reason-normal" class="hidden">
+        <label>MOTIF (NUMÉRO NORMAL)</label>
+        <select id="reason">
+          <option>Spam</option>
+          <option>Arnaque</option>
+          <option>Harcèlement</option>
+          <option>Contenu inapproprié</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <button class="btn-red" id="btn-report" onclick="report()">⚡ SIGNALER ET BLOQUER</button>
+      <button class="btn-outline" onclick="blockAction('block')">BLOQUER</button>
+      <button class="btn-outline" onclick="blockAction('unblock')">DÉBLOQUER</button>
+    </div>
+    <p id="message"></p>
+  </section>
+
+  <section id="step-list">
+    <h2>NUMÉROS SIGNALÉS</h2>
+    <ul id="report-list"></ul>
+  </section>
+
+  <footer>CRÉER PAR MR VORTEX PRIME TDL</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
