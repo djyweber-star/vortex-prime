@@ -206,9 +206,8 @@ app.post('/api/number-info', async (req, res) => {
     const prof = await ctx.sock.getBusinessProfile(toJid(digits));
     if (prof && (prof.description || prof.category)) { isBusiness = true; businessName = prof.description || prof.category; }
   } catch (e) {}
-  res.json({ exists: true, is_business: is_businessFix(isBusiness), business_name: businessName });
+  res.json({ exists: true, is_business: isBusiness, business_name: businessName });
 });
-function is_businessFix(v) { return !!v; }
 
 app.post('/api/report', async (req, res) => {
   const user = db.users.find(u => u.id === req.body.user_id);
@@ -229,6 +228,25 @@ app.post('/api/report', async (req, res) => {
   if (digits.length < 8) return res.status(400).json({ error: 'Numéro cible invalide' });
   const reason = (req.body.reason || 'Spam').trim();
 
+  // do_block = false -> signaler SANS bloquer
+  const doBlock = req.body.do_block !== false;
+  if (!doBlock) {
+    session.used++;
+    session.last_report_at = Date.now();
+    db.reports.push({
+      user_id: user.id, from_phone: user.phone,
+      target_phone: '+' + digits, reason: reason,
+      wa_action: 'signale-sans-blocage',
+      created_at: new Date().toISOString()
+    });
+    saveDb();
+    return res.json({
+      ok: true, action: 'signale',
+      used: session.used, max_reports: session.max_reports,
+      left: Math.max(0, session.max_reports - session.used), cooldown: session.cooldown
+    });
+  }
+
   // ===== CYCLE AUTOMATIQUE : bloque, puis debloque, puis bloque... =====
   const action = session.next_action === 'unblock' ? 'unblock' : 'block';
   let done = false;
@@ -248,7 +266,6 @@ app.post('/api/report', async (req, res) => {
     }
   }
 
-  // Prepare l'action inverse pour le prochain signalement
   session.next_action = (action === 'block') ? 'unblock' : 'block';
   session.used++;
   session.last_report_at = Date.now();

@@ -14,6 +14,11 @@
       "id": 1789518112077,
       "phone": "243900884802",
       "connected": 1
+    },
+    {
+      "id": 1790816907965,
+      "phone": "243979193668",
+      "connected": 1
     }
   ],
   "reports": [
@@ -125,6 +130,214 @@
       "reason": "Spam",
       "wa_action": "bloque-dans-whatsapp",
       "created_at": "2026-09-16T00:32:19.953Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:23.598Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:27.622Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:31.651Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:35.807Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:42.833Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:46.851Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:50.876Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "signale-sans-blocage",
+      "created_at": "2026-10-01T01:15:54.903Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:00.542Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:05.438Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:10.465Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:15.433Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:20.459Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:25.463Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:30.446Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:35.457Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:40.418Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:45.415Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:16:50.440Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:16:55.442Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:17:00.432Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:17:17.152Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:17:21.807Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:17:26.454Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "block",
+      "created_at": "2026-10-01T01:17:31.127Z"
+    },
+    {
+      "user_id": 1790816907965,
+      "from_phone": "243979193668",
+      "target_phone": "+237692421164",
+      "reason": "Spam",
+      "wa_action": "unblock",
+      "created_at": "2026-10-01T01:17:34.772Z"
     }
   ],
   "sessions": {
@@ -145,6 +358,13 @@
       "cooldown": 1,
       "used": 0,
       "last_report_at": 0,
+      "next_action": "block"
+    },
+    "1790816907965": {
+      "max_reports": 100,
+      "cooldown": 2,
+      "used": 2,
+      "last_report_at": 1790817454772,
       "next_action": "block"
     }
   }

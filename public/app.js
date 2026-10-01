@@ -4,54 +4,11 @@ let waMode = 'pairing';
 let numIsBusiness = false;
 let autoRun = false;
 
-let audioCtx = null;
-function playFunk() {
-  try {
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [110, 110, 146.8, 110, 130.8, 110, 164.8, 146.8];
-    notes.forEach((freq, i) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.value = freq;
-      const t = audioCtx.currentTime + i * 0.14;
-      gain.gain.setValueAtTime(0.0001, t);
-      gain.gain.exponentialRampToValueAtTime(0.14, t + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.13);
-      osc.connect(gain).connect(audioCtx.destination);
-      osc.start(t); osc.stop(t + 0.15);
-    });
-  } catch (e) {}
-}
-document.addEventListener('click', playFunk, { once: true });
-
-(function bg() {
-  const c = document.getElementById('bgfx');
-  const ctx = c.getContext('2d');
-  function size() { c.width = innerWidth; c.height = innerHeight; }
-  size(); onresize = size;
-  const dots = Array.from({ length: 60 }, () => ({
-    x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-    vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4
-  }));
-  setInterval(() => {
-    ctx.fillStyle = '#03060e'; ctx.fillRect(0, 0, c.width, c.height);
-    dots.forEach(d => {
-      d.x += d.vx; d.y += d.vy;
-      if (d.x < 0 || d.x > c.width) d.vx *= -1;
-      if (d.y < 0 || d.y > c.height) d.vy *= -1;
-      ctx.fillStyle = '#00ff9d';
-      ctx.fillRect(d.x, d.y, 1.5, 1.5);
-    });
-  }, 40);
-})();
-
 function setMode(m) {
   waMode = m;
   document.getElementById('mode-qr').classList.toggle('active', m === 'qr');
   document.getElementById('mode-pairing').classList.toggle('active', m === 'pairing');
 }
-setMode('pairing');
 
 async function connect() {
   const phone = document.getElementById('phone').value.trim();
@@ -85,18 +42,6 @@ async function connect() {
   pollStatus(phone);
 }
 
-async function resetSession() {
-  const phone = document.getElementById('phone').value.trim();
-  if (!phone) return alert('Entre ton numéro d\u2019abord');
-  await fetch('/api/wa/reset', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone: phone })
-  });
-  document.getElementById('pairing').classList.add('hidden');
-  alert('Session réinitialisée. Relance la connexion pour un nouvel appairage.');
-}
-
 function pollStatus(phone) {
   clearInterval(pollTimer);
   pollTimer = setInterval(async () => {
@@ -119,6 +64,18 @@ function pollStatus(phone) {
       await enterPanel();
     }
   }, 2000);
+}
+
+async function resetSession() {
+  const phone = document.getElementById('phone').value.trim();
+  if (!phone) return alert('Entre ton numéro d\u2019abord');
+  await fetch('/api/wa/reset', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone: phone })
+  });
+  document.getElementById('pairing').classList.add('hidden');
+  alert('Session réinitialisée. Relance la connexion.');
 }
 
 async function enterPanel() {
@@ -186,23 +143,16 @@ async function checkNumber() {
   if (data.error) { msg.textContent = data.error; box.classList.add('hidden'); return; }
 
   numIsBusiness = !!data.is_business;
-
-  if (data.exists === true) {
-    if (numIsBusiness) {
-      document.getElementById('ntext').textContent = '🏢 WHATSAPP BUSINESS détecté' + (data.business_name ? ' — ' + data.business_name : '');
-      document.getElementById('reason-biz').classList.remove('hidden');
-      document.getElementById('reason-normal').classList.add('hidden');
-    } else {
-      document.getElementById('ntext').textContent = '👤 Numéro WHATSAPP NORMAL détecté';
-      document.getElementById('reason-normal').classList.remove('hidden');
-      document.getElementById('reason-biz').classList.add('hidden');
-    }
-  } else if (data.exists === 'unknown') {
-    document.getElementById('ntext').textContent = '❓ Vérification non concluante — tu peux quand même agir';
+  if (data.exists === true && numIsBusiness) {
+    document.getElementById('ntext').textContent = '🏢 WHATSAPP BUSINESS détecté' + (data.business_name ? ' — ' + data.business_name : '');
+    document.getElementById('reason-biz').classList.remove('hidden');
+    document.getElementById('reason-normal').classList.add('hidden');
+  } else if (data.exists === false) {
+    document.getElementById('ntext').textContent = '⚠️ Numéro absent de WhatsApp — vérifie-le';
     document.getElementById('reason-normal').classList.remove('hidden');
     document.getElementById('reason-biz').classList.add('hidden');
   } else {
-    document.getElementById('ntext').textContent = '⚠️ Ce numéro semble absent de WhatsApp — vérifie-le avant d\u2019agir';
+    document.getElementById('ntext').textContent = '👤 Numéro détecté (ou vérification non concluante)';
     document.getElementById('reason-normal').classList.remove('hidden');
     document.getElementById('reason-biz').classList.add('hidden');
   }
@@ -218,24 +168,21 @@ function startCountdown(seconds, onDone) {
   const msg = document.getElementById('message');
   let remaining = seconds;
   const timer = setInterval(() => {
-    if (remaining <= 0) {
-      clearInterval(timer); msg.textContent = '';
-      if (onDone) onDone();
-      return;
-    }
-    msg.innerHTML = 'PAUSE : <span id="countdown">' + remaining + 's</span> avant le prochain cycle';
+    if (remaining <= 0) { clearInterval(timer); if (onDone) onDone(); return; }
+    msg.innerHTML = 'PAUSE : <b>' + remaining + 's</b> avant le prochain cycle — LÂCHE TOUT, ÇA CONTINUE TOUT SEUL';
     remaining--;
   }, 1000);
 }
 
-async function reportOnce() {
+async function reportOnce(doBlock) {
   const res = await fetch('/api/report', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       user_id: userId,
       target_phone: document.getElementById('target').value.trim(),
-      reason: currentReason()
+      reason: currentReason(),
+      do_block: doBlock
     })
   });
   return await res.json();
@@ -243,35 +190,21 @@ async function reportOnce() {
 
 function setBusy(b) {
   document.getElementById('btn-report').disabled = b;
-  document.getElementById('btn-reportall').disabled = b;
+  document.getElementById('btn-report-noblock').disabled = b;
   document.getElementById('btn-stop').classList.toggle('hidden', !b);
 }
 
-async function report() {
-  setBusy(true);
-  const data = await reportOnce();
-  const msg = document.getElementById('message');
-  if (data.error) {
-    if (data.error === 'PAUSE') { msg.textContent = 'Pause en cours...'; startCountdown(data.remaining); }
-    else msg.textContent = data.error;
-    setBusy(false);
-    return;
-  }
-  msg.textContent = data.action === 'block'
-    ? '✔ CYCLE ' + data.used + '/' + data.max_reports + ' : NUMÉRO BLOQUÉ'
-    : '✔ CYCLE ' + data.used + '/' + data.max_reports + ' : NUMÉRO DÉBLOQUÉ';
-  updateQuota(); renderReports();
-  setBusy(false);
-}
-
-// ====== EXECUTION AUTOMATIQUE : cycles bloque/debloque jusqu'au nombre demandé ======
-async function reportAll() {
+// ===== MOTEUR AUTOMATIQUE =====
+// UN appui -> repetitions jusqu'au nombre choisi, pauses incluses, arret automatique.
+async function runAuto(doBlock) {
+  if (autoRun) return;
   autoRun = true;
   setBusy(true);
   const msg = document.getElementById('message');
+  let fini = false;
 
-  while (autoRun) {
-    const data = await reportOnce();
+  while (autoRun && !fini) {
+    const data = await reportOnce(doBlock);
     if (!autoRun) break;
 
     if (data.error) {
@@ -279,17 +212,22 @@ async function reportAll() {
         await new Promise(resolve => startCountdown(data.remaining, resolve));
         continue;
       }
-      msg.textContent = data.error;
+      msg.textContent = '⛔ ' + data.error;
       break;
     }
 
-    msg.textContent = data.action === 'block'
-      ? '🔄 CYCLE ' + data.used + ' / ' + data.max_reports + ' : BLOQUÉ... '
-      : '🔄 CYCLE ' + data.used + ' / ' + data.max_reports + ' : DÉBLOQUÉ... ';
+    if (doBlock) {
+      msg.textContent = data.action === 'block'
+        ? '🔄 CYCLE ' + data.used + ' / ' + data.max_reports + ' : SIGNALÉ + BLOQUÉ ✔'
+        : '🔄 CYCLE ' + data.used + ' / ' + data.max_reports + ' : DÉBLOQUÉ ✔';
+    } else {
+      msg.textContent = '🔄 SIGNALEMENT ' + data.used + ' / ' + data.max_reports + ' ENREGISTRÉ (sans blocage) ✔';
+    }
     updateQuota(); renderReports();
 
     if (data.left <= 0) {
-      msg.textContent = '🏁 TERMINÉ : ' + data.used + ' cycles bloque/débloque effectués.';
+      fini = true;
+      msg.textContent = '🏁 TERMINÉ : ' + data.used + ' / ' + data.max_reports + ' effectués. Arrêt automatique.';
       break;
     }
     await new Promise(resolve => startCountdown(data.cooldown, resolve));
@@ -298,6 +236,9 @@ async function reportAll() {
   autoRun = false;
   setBusy(false);
 }
+
+function report() { runAuto(true); }
+function reportNoBlock() { runAuto(false); }
 
 function stopAuto() {
   autoRun = false;
@@ -331,5 +272,5 @@ async function renderReports() {
     : '<li style="color:#446">Aucun signalement pour le moment.</li>';
 }
 
-renderReports();
 setInterval(renderReports, 15000);
+renderReports();

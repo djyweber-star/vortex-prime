@@ -37,7 +37,7 @@
 
     <div id="settings">
       <h3>PARAMÈTRES</h3>
-      <label>NOMBRE DE SIGNALEMENTS</label>
+      <label>NOMBRE DE SIGNALEMENTS (1 À 100)</label>
       <div class="stepper">
         <button onclick="stepVal('max-reports', -1)">▼</button>
         <input id="max-reports" type="number" value="5" min="1" max="100">
@@ -55,7 +55,7 @@
     <div id="report-zone" class="hidden">
       <p id="quota" class="quota"></p>
       <input id="target" type="tel" placeholder="Numéro à signaler / bloquer">
-      <button class="btn-outline" onclick="checkNumber()">🔍 VÉRIFIER LE NUMÉRO</button>
+      <button class="btn-outline" onclick="checkNumber()">VÉRIFIER LE NUMÉRO</button>
       <div id="number-type" class="hidden">
         <p id="ntext"></p>
       </div>
@@ -79,9 +79,11 @@
           <option>Autre</option>
         </select>
       </div>
-      <button class="btn-red" id="btn-report" onclick="report()">⚡ SIGNALER ET BLOQUER</button>
-      <button class="btn-outline" onclick="blockAction('block')">BLOQUER</button>
-      <button class="btn-outline" onclick="blockAction('unblock')">DÉBLOQUER</button>
+      <button class="btn-red" id="btn-report" onclick="report()">SIGNALER ET BLOQUER — LANCER TOUTE LA SÉQUENCE</button>
+      <button class="btn-main" id="btn-report-noblock" onclick="reportNoBlock()">SIGNALER SANS BLOQUER — LANCER TOUTE LA SÉQUENCE</button>
+      <button class="btn-red hidden" id="btn-stop" onclick="stopAuto()">STOP</button>
+      <button class="btn-outline" onclick="blockAction('block')">BLOQUER (MANUEL)</button>
+      <button class="btn-outline" onclick="blockAction('unblock')">DÉBLOQUER (MANUEL)</button>
     </div>
     <p id="message"></p>
   </section>
@@ -93,6 +95,6 @@
 
   <footer>CRÉER PAR MR VORTEX PRIME TDL</footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
